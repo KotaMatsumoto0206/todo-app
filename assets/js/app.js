@@ -28,6 +28,26 @@ function addTodo() {
     const li = document.createElement('li');
     li.textContent = taskText;
 
+    // deletebuttonを創造して定義　削除ボタン作成
+    const deleteButton = document.createElement('button');
+
+    // deletebuttonに.innerhtmlで&times;(x)を入れている
+    deleteButton.innerHTML = '&times;';
+
+    // CSS用のタグづけ
+    deleteButton.className = 'delete-button';
+
+    // deletebuttonにsetattribureで属性をつける、読み上げでは削除と読み上げるよ　アクセシビリティ
+    deleteButton.setAttribute('aria-label', '削除');
+
+    // 
+    deleteButton.addEventListener('click', () => {
+        li.remove();
+    });
+
+    // 
+    li.appendChild(deleteButton);
+
     // TodoListにliを.appendChildで押し上げる
     todoList.appendChild(li);
 
