@@ -9,8 +9,10 @@ const todoList = document.querySelector('.todo-list');
 function createTodoElement(text) {
     // リスト(li)を作成し、定義
     const li = document.createElement('li');
-    // 入力されたtextをliタグの間に入れる
-    li.textContent = text;
+    
+    const span = document.createElement('span')   //文字専用の入れ物spanを入れる
+    span.textContent = text;
+    span.className = 'todo-text';   //CSSようのタグづけ
 
     // deleteボタンを作成して定義
     const deleteButton = document.createElement('button');
@@ -21,11 +23,20 @@ function createTodoElement(text) {
     // アクセシビリティ　読み上げ
     deleteButton.setAttribute('aria-label', '削除');
 
+    li.addEventListener('click', () => {   //クリックされたらトグルのオンオフ
+        li.classList.toggle('completed');
+    }); 
+
     // 削除イベント
-    deleteButton.addEventListener('click', () => li.remove());
+    deleteButton.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        li.remove();
+    });
 
     // 削除ボタンとliを合体
+    li.appendChild(span);
     li.appendChild(deleteButton);
+    
     return li;
 }
 

@@ -1,0 +1,11 @@
+
+/* completedクラスがついたliの中にある、todo-text(span)に線を引く */
+.completed .todo-text {
+    text-decoration: line-through;
+    color: grey;
+}
+
+/* わかりやすいポインター */
+li {
+    cursor: pointer;
+}
