@@ -3,6 +3,13 @@ body {
     background-color: #f4f7f6; 
     color: #333; 
     line-height: 1.6;
+
+    display: flex;   /* 中の要素を自由自在にいじるよ！という宣言   */
+    flex-direction: column;   /*   縦向きに並べる指示   */
+    align-items: center;   /*   左右を真ん中寄せにする指示   */
+    min-height: 100vh;   /*   デフォルトの高さを確保   */
+    margin: 0;   /*   外側の余白を消す   */
+    padding: 20px;   /*   内側の余白をつくる   */
 }
 
 /* タイトルを少し太く、かっこよく */
