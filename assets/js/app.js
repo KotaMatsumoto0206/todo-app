@@ -40,12 +40,12 @@ function addTodo() {
     // deletebuttonにsetattribureで属性をつける、読み上げでは削除と読み上げるよ　アクセシビリティ
     deleteButton.setAttribute('aria-label', '削除');
 
-    // 
+    // クリックされたらさくじょ
     deleteButton.addEventListener('click', () => {
         li.remove();
     });
 
-    // 
+    // 削除ボタンをはめ込む
     li.appendChild(deleteButton);
 
     // TodoListにliを.appendChildで押し上げる
