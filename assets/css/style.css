@@ -1,4 +1,16 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f4f7f6; 
+    color: #333; 
+}
 
+/* タイトルを少し太く、かっこよく */
+.todo-header {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 700;
+    letter-spacing: 1px; /* 文字の間隔を少し広げるとおしゃれ */
+}
 /* completedクラスがついたliの中にある、todo-text(span)に線を引く */
 .completed .todo-text {
     text-decoration: line-through;
