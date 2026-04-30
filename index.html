@@ -22,15 +22,17 @@
 
 <body>
 
-    <h1 class="todo-header">Todo list</h1>
+    <main class="todo-container">
+        <h1 class="todo-header">Todo list</h1>
 
-    <div class="todo-input-group">
-        <label for="todo-input">新しいタスクを追加</label>
-        <input type="text" id="todo-input">
-        <button class="add-button" type="button">追加</button>
-    </div>
+        <div class="todo-input-group">
+            <label for="todo-input" class="sr-only">新しいタスクを追加</label>
+            <input type="text" id="todo-input" placeholder="新しいタスクを入力...">
+            <button class="add-button" type="button">追加</button>
+        </div>
 
-    <ul class="todo-list"></ul>
+        <ul class="todo-list"></ul>
+    </main>
     
 </body>
 
