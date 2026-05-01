@@ -9,11 +9,15 @@ export function createTodoElement(todo, onToggle, onDelete, onEdit) {
     // チェックボックスの変更イベント
     checkbox.addEventListener('change', () => onToggle(li, checkbox.checked));
 
+    // dom.js の span 部分
     const span = document.createElement('span');
     span.textContent = todo.text;
     span.className = 'todo-text';
-    // ダブルクリックで編集イベント
-    span.addEventListener('dblclick', () => onEdit(li, span));
+
+    // ここで main.js から受け取った handleEdit (onEdit) を実行する
+    span.addEventListener('dblclick', () => {
+    onEdit(li, span); 
+    });
 
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '&times;';

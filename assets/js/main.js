@@ -5,7 +5,7 @@ const todoInput = document.querySelector('#todo-input');
 const addButton = document.querySelector('.add-button');
 const todoList = document.querySelector('.todo-list');
 
-// 保存用関数（全リストをスキャンしてstorageに渡す）
+// 保存用関数
 function updateAndSave() {
     const todos = [];
     document.querySelectorAll('.todo-list li').forEach(li => {
@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 各種ハンドラー（dom.jsから呼ばれる）
+// --- 各種ハンドラー（ここをスッキリ整理しました） ---
+
 function handleToggle(li, isChecked) {
     li.classList.toggle('completed', isChecked);
     updateAndSave();
@@ -38,18 +39,50 @@ function handleDelete(li) {
 }
 
 function handleEdit(li, span) {
-    // ここに前回の編集ロジックを配置
-    // 編集完了後に updateAndSave() を呼ぶ
+    const currentText = span.textContent;
+    const editInput = document.createElement('input');
+    editInput.type = 'text';
+    editInput.value = currentText;
+    editInput.className = 'edit-input';
+
+    li.replaceChild(editInput, span);
+    editInput.focus();
+
+    const finishEditing = () => {
+        const newText = editInput.value.trim();
+        if (newText) {
+            span.textContent = newText;
+        } else {
+            span.textContent = currentText;
+        }
+        
+        if (li.contains(editInput)) {
+            li.replaceChild(span, editInput);
+        }
+        updateAndSave(); 
+    };
+
+    editInput.addEventListener('blur', finishEditing);
+    editInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') finishEditing();
+    });
 }
 
 // 新規追加
 function addTodo() {
     const text = todoInput.value.trim();
     if (!text) return;
+    // 第2引数以降に、上記で定義した関数（ハンドラー）を渡す
     const item = createTodoElement({text, completed: false}, handleToggle, handleDelete, handleEdit);
     todoList.appendChild(item);
     updateAndSave();
     todoInput.value = "";
+    todoInput.focus();
 }
 
+// イベント設定
 addButton.addEventListener('click', addTodo);
+todoInput.addEventListener('keydown', (e) => {
+    if (e.isComposing || e.keyCode === 229) return;
+    if (e.key === 'Enter') addTodo();
+});
