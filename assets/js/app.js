@@ -63,22 +63,16 @@ function createTodoElement(text) {
 
 // 実行　監督役
 function addTodo() {
-    // htmlの<input type="text" id="todo-input">の.value(入力された文字)をtrim()空白削除をする
-    const taskText = todoInput.value.trim();
-    // 空白のみなら終了
-    if (!taskText) return;
+    const taskText = todoInput.value.trim();   // htmlの<input type="text" id="todo-input">の.value(入力された文字)をtrim()空白削除をする
+    if (!taskText) return;  // 空白のみなら終了
 
-    // createTodoElementからのtaskTextを入れる
-    const todoItem = createTodoElement(taskText);
-    // TodoItemとtodoListを合体
-    todoList.appendChild(todoItem);
+    const todoItem = createTodoElement(taskText);   // createTodoElementからのtaskTextを入れる
+    todoList.appendChild(todoItem);     // TodoItemとtodoListを合体
 
     saveToLocalStorage(); // 追加したら保存
 
-    // 入力欄を空に
-    todoInput.value = "";
-    // 入力がすぐに進められるようカーソルを準備
-    todoInput.focus(); 
+    todoInput.value = "";   // 入力欄を空に
+    todoInput.focus();  // 入力がすぐに進められるようカーソルを準備
 }
 
 // イベント設定
