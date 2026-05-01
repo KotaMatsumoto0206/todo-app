@@ -37,6 +37,29 @@ function createTodoElement(text) {
     span.textContent = text;
     span.className = 'todo-text';   //CSSようのタグづけ
 
+    // span（テキスト部分）にダブルクリックイベントを追加
+span.addEventListener('dblclick', () => {
+    const currentText = span.textContent;
+    const editInput = document.createElement('input');
+    editInput.value = currentText;
+    
+    // spanをinputに一時的に置き換え
+    li.replaceChild(editInput, span);
+    editInput.focus();
+
+    // フォーカスが外れたとき、またはEnterを押したときに確定
+    const updateTask = () => {
+        span.textContent = editInput.value.trim() || currentText;
+        li.replaceChild(span, editInput);
+        saveToLocalStorage();
+    };
+
+    editInput.addEventListener('blur', updateTask);
+    editInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') updateTask();
+    });
+});
+
     const deleteButton = document.createElement('button');   // deleteボタンを作成して定義
     deleteButton.innerHTML = '&times;';   // deleteButtonをHTMLでxを表現
     deleteButton.className = 'delete-button';   // CSS用のタグ
