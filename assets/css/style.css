@@ -29,3 +29,8 @@ body {
 li {
     cursor: pointer;
 }
+
+/* ドラッグ中の要素を半透明にする */
+.dragging {
+    opacity: 0.5;
+}

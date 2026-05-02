@@ -21,7 +21,7 @@ function updateAndSave() {
 document.addEventListener('DOMContentLoaded', () => {
     const savedTodos = storage.load();
     savedTodos.forEach(todo => {
-        const item = createTodoElement(todo, handleToggle, handleDelete, handleEdit);
+        const item = createTodoElement(todo, handleToggle, handleDelete, handleEdit, handleDragStart, handleDragEnd, handleDrop);
         todoList.appendChild(item);
     });
 });
@@ -68,12 +68,40 @@ function handleEdit(li, span) {
     });
 }
 
+// --- ドラッグ＆ドロップ ハンドラー ---
+let draggedItem = null;
+
+function handleDragStart(li) {
+    draggedItem = li;
+    li.classList.add('dragging');
+}
+
+function handleDragEnd(li) {
+    li.classList.remove('dragging');
+    draggedItem = null;
+}
+
+function handleDrop(targetLi) {
+    if (!draggedItem || draggedItem === targetLi) return;
+
+    const children = Array.from(todoList.children);
+    const draggedIndex = children.indexOf(draggedItem);
+    const targetIndex = children.indexOf(targetLi);
+
+    if (draggedIndex < targetIndex) {
+        targetLi.after(draggedItem);
+    } else {
+        targetLi.before(draggedItem);
+    }
+    updateAndSave();
+}
+
 // 新規追加
 function addTodo() {
     const text = todoInput.value.trim();
     if (!text) return;
     // 第2引数以降に、上記で定義した関数（ハンドラー）を渡す
-    const item = createTodoElement({text, completed: false}, handleToggle, handleDelete, handleEdit);
+    const item = createTodoElement({text, completed: false}, handleToggle, handleDelete, handleEdit, handleDragStart, handleDragEnd, handleDrop);
     todoList.appendChild(item);
     updateAndSave();
     todoInput.value = "";
