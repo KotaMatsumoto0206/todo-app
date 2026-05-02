@@ -11,4 +11,3 @@
 - JavaScript (Vanilla JS)
 
 ## 実装予定
-- 並び替え機能
