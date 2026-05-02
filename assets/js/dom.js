@@ -1,4 +1,4 @@
-export function createTodoElement(todo, onToggle, onDelete, onEdit, onDragStart, onDragEnd, onDrop) {
+export function createTodoElement(todo, { onToggle, onDelete, onEdit, onDragStart, onDragEnd, onDrop }) {
     const li = document.createElement('li');
     if (todo.completed) li.classList.add('completed');
 
