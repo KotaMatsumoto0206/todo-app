@@ -1,10 +1,10 @@
-//localStorage とのやり取りだけを専門
-const STORAGE_KEY = 'myTodoList';
+// 永続化層 (データ保管庫の役割)
+const STORAGE_KEY = 'myTodoList';   // 'myTodoList'って箱を定数化
 
-export const storage = {
+export const storage = {    // exportで他ファイル内で使えるようになる
     // 保存
-    save(todos) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    save(todos) {   // todos=入力されたもの
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));   // ラベルを付けてJson形式で保存
     },
     // 読み込み
     load() {
