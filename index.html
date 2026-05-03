@@ -12,30 +12,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- 2. ライブラリ・リセット用CSS（土台） -->
-    <link rel="stylesheet" href="./assets/css/sanitize.css">
-
-    <!-- 3. メインのCSS（自分のこだわり） -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-
     <script src="./assets/js/main.js" type="module"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Noto Sans JP', sans-serif;
+            }
+        }
+        @layer components {
+            .completed .todo-text {
+                @apply line-through text-gray-400;
+            }
+            .dragging {
+                @apply opacity-50;
+            }
+        }
+    </style>
     
 </head>
 
-<body>
+<body class="bg-gray-50 min-h-screen flex items-start justify-center pt-12 px-4">
 
-    <main class="todo-container">
-        <h1 class="todo-header">Todo list</h1>
+    <main class="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">Todo list</h1>
 
-        <div class="todo-input-group">
+        <div class="flex gap-2 mb-6">
             <label for="todo-input" class="sr-only">新しいタスクを追加</label>
-            <input type="text" id="todo-input" placeholder="新しいタスクを入力...">
-            <button class="add-button" type="button">追加</button>
+        
+            <input type="text" id="todo-input" placeholder="新しいタスクを入力..."
+                class="flex-1 px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-gray-400">
+        
+            <button class="add-button bg-blue-600 hover:bg-blue-700 active:scale-95 text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-md hover:shadow-lg" type="button">
+                追加
+            </button>
         </div>
 
-        <ul class="todo-list"></ul>
+        <ul class="todo-list space-y-3"></ul>
     </main>
     
 </body>
